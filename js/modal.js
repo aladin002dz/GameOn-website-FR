@@ -29,4 +29,38 @@ function closeModal() {
 }
 
 
+// Form validation
+const formElement = document.querySelector("form[name='reserve']");
+const firstNameInput = document.getElementById("first");
+const lastNameInput = document.getElementById("last");
+const emailInput = document.getElementById("email");
+const birthdateInput = document.getElementById("birthdate");
+const quantityInput = document.getElementById("quantity");
+
+function validateFirstName() {
+  console.log("validateFirstName");
+  const parentElement = firstNameInput.parentElement;
+  if (firstNameInput.value.length < 2) {
+    parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    parentElement.setAttribute("data-error-visible", true);
+    return false;
+  }
+  parentElement.setAttribute("data-error-visible", false);
+  return true;
+}
+
+formElement.addEventListener("submit", handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  if (!validateFirstName()) {
+    return;
+  }
+  displayConfirmationMessage();
+}
+
+function displayConfirmationMessage() {
+  alert("Merci pour votre réservation !");
+}
+
 
