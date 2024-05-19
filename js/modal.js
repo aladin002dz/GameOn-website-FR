@@ -150,6 +150,9 @@ function removeErrorMessages(input) {
 
 //feedback immediat pour l'utilisateur
 firstNameInput.addEventListener("blur", (e) => validateNames(e.target));
+/* ou plus simplement
+firstNameInput.addEventListener("blur", () => validateNames(firstNameInput)); */
+
 lastNameInput.addEventListener("blur", (e) => validateNames(e.target));
 emailInput.addEventListener("blur", validateEmail);
 birthdateInput.addEventListener("blur", validateBirthdate);
