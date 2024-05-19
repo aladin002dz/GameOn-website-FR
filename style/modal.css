@@ -584,3 +584,32 @@ footer {
     opacity: 1;
   }
 }
+
+/*
+form[name="reserve"] {
+  visibility: hidden;
+}*/
+
+form[name="confirmation"] {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+#confirmationMessage {
+  margin-inline: auto;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 72px);
+}
+
+form[name="confirmation"] h2 {
+  font-size: 36px;
+  text-align: center;
+}

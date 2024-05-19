@@ -30,7 +30,7 @@ function closeModal() {
 
 
 // Form validation
-const formElement = document.querySelector("form[name='reserve']");
+const formReserve = document.querySelector("form[name='reserve']");
 const firstNameInput = document.getElementById("first");
 const lastNameInput = document.getElementById("last");
 const emailInput = document.getElementById("email");
@@ -105,8 +105,8 @@ function validateCheckbox() {
 }
 
 //form submit
-formElement.addEventListener("submit", handleSubmit);
-function handleSubmit(event) {
+formReserve.addEventListener("submit", handleReserveSubmit);
+function handleReserveSubmit(event) {
   event.preventDefault();
   if (!validateNames(firstNameInput) | !validateNames(lastNameInput) | !validateEmail() |
     !validateBirthdate() | !validateQuantity() | !validateCheckbox() | !validateLocation()) {
@@ -115,10 +115,19 @@ function handleSubmit(event) {
   displayConfirmationMessage();
 }
 
+
+const formConfirmation = document.querySelector("form[name='confirmation']");
 function displayConfirmationMessage() {
-  formElement.reset();
-  alert("Merci pour votre réservation !");
+  formReserve.reset();
+  formReserve.style.visibility = "hidden";
+  formConfirmation.style.display = "block";
 }
+formConfirmation.addEventListener("submit", (event) => {
+  event.preventDefault();
+  formConfirmation.style.display = "none";
+  formReserve.style.visibility = "visible";
+  closeModal();
+});
 
 function displayErrorMessages(input, message) {
   const parentElement = input.parentElement;
