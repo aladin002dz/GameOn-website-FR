@@ -37,11 +37,23 @@ const emailInput = document.getElementById("email");
 const birthdateInput = document.getElementById("birthdate");
 const quantityInput = document.getElementById("quantity");
 
-function validateFirstName() {
+function validateNames(nameInput) {
   console.log("validateFirstName");
-  const parentElement = firstNameInput.parentElement;
-  if (firstNameInput.value.length < 2) {
+  const parentElement = nameInput.parentElement;
+  if (nameInput.value.length < 2) {
     parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
+    parentElement.setAttribute("data-error-visible", true);
+    return false;
+  }
+  parentElement.setAttribute("data-error-visible", false);
+  return true;
+}
+
+function validateLastName() {
+  console.log("validateLastName");
+  const parentElement = lastNameInput.parentElement;
+  if (lastNameInput.value.length < 2) {
+    parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
     parentElement.setAttribute("data-error-visible", true);
     return false;
   }
@@ -53,13 +65,14 @@ formElement.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
-  if (!validateFirstName()) {
+  if (!validateNames(firstNameInput) | !validateNames(lastNameInput)) {
     return;
   }
   displayConfirmationMessage();
 }
 
 function displayConfirmationMessage() {
+  formElement.reset();
   alert("Merci pour votre réservation !");
 }
 
