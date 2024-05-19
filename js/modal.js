@@ -97,14 +97,12 @@ function validateLocation() {
 function validateCheckbox() {
   const checkbox = document.getElementById("checkbox1");
   if (!checkbox.checked) {
-    displayErrorMessages(checkbox, "");
+    displayErrorMessages(checkbox, "Veuillez accepter les conditions d'utilisation.");
     return false;
   }
   removeErrorMessages(checkbox);
   return true;
 }
-
-
 
 //form submit
 formElement.addEventListener("submit", handleSubmit);
@@ -121,7 +119,6 @@ function displayConfirmationMessage() {
   formElement.reset();
   alert("Merci pour votre réservation !");
 }
-
 
 function displayErrorMessages(input, message) {
   const parentElement = input.parentElement;
