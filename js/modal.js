@@ -38,30 +38,39 @@ const birthdateInput = document.getElementById("birthdate");
 const quantityInput = document.getElementById("quantity");
 
 function validateNames(nameInput) {
-  const parentElement = nameInput.parentElement;
   if (nameInput.value.length < 2) {
-    parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
-    parentElement.setAttribute("data-error-visible", true);
+    const errorMessage = `Veuillez entrer 2 caractères ou plus pour le champ du
+     ${nameInput === firstNameInput ? "prénom" : "nom"}`;
+    displayErrorMessages(nameInput, errorMessage);
     return false;
   }
-  parentElement.setAttribute("data-error-visible", false);
+  removeErrorMessages(nameInput);
   return true;
 }
 
 function validateEmail() {
-  const parentElement = emailInput.parentElement;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   if (!emailRegex.test(emailInput.value)) {
-    parentElement.setAttribute("data-error", "Veuillez entrer un email valide.");
-    parentElement.setAttribute("data-error-visible", true);
+    displayErrorMessages(emailInput, "Veuillez entrer un email valide.");
     return false;
   }
-  parentElement.setAttribute("data-error-visible", false);
+  removeErrorMessages(emailInput);
   return true;
 }
 
-formElement.addEventListener("submit", handleSubmit);
+function displayErrorMessages(input, message) {
+  const parentElement = input.parentElement;
+  parentElement.setAttribute("data-error", message);
+  parentElement.setAttribute("data-error-visible", true);
+}
 
+function removeErrorMessages(input) {
+  const parentElement = input.parentElement;
+  parentElement.setAttribute("data-error-visible", false);
+}
+
+//form submit
+formElement.addEventListener("submit", handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
   if (!validateNames(firstNameInput) | !validateNames(lastNameInput) | !validateEmail()) {
