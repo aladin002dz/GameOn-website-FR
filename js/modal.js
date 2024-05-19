@@ -38,7 +38,6 @@ const birthdateInput = document.getElementById("birthdate");
 const quantityInput = document.getElementById("quantity");
 
 function validateNames(nameInput) {
-  console.log("validateFirstName");
   const parentElement = nameInput.parentElement;
   if (nameInput.value.length < 2) {
     parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
@@ -49,11 +48,11 @@ function validateNames(nameInput) {
   return true;
 }
 
-function validateLastName() {
-  console.log("validateLastName");
-  const parentElement = lastNameInput.parentElement;
-  if (lastNameInput.value.length < 2) {
-    parentElement.setAttribute("data-error", "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+function validateEmail() {
+  const parentElement = emailInput.parentElement;
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!emailRegex.test(emailInput.value)) {
+    parentElement.setAttribute("data-error", "Veuillez entrer un email valide.");
     parentElement.setAttribute("data-error-visible", true);
     return false;
   }
@@ -65,7 +64,7 @@ formElement.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
-  if (!validateNames(firstNameInput) | !validateNames(lastNameInput)) {
+  if (!validateNames(firstNameInput) | !validateNames(lastNameInput) | !validateEmail()) {
     return;
   }
   displayConfirmationMessage();
