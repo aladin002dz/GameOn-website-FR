@@ -81,8 +81,16 @@ function validateQuantity() {
   removeErrorMessages(quantityInput);
   return true;
 }
-
+const locations = document.querySelectorAll("input[name='location']");
+locations.forEach((location) => location.addEventListener("change",
+  (e) => {
+    if (e.target.checked) {
+      removeErrorMessages(locations[0])
+    }
+  }
+));
 function validateLocation() {
+  /*
   const locations = document.querySelectorAll("input[name='location']");
   for (let i = 0; i < locations.length; i++) {
     if (locations[i].checked) {
@@ -90,8 +98,18 @@ function validateLocation() {
       return true;
     }
   }
+  //si aucune localisation n'est cochée
   displayErrorMessages(locations[0], "Veuillez choisir une localisation.");
   return false;
+  */
+  //une solution alternative est d'utiliser un selecteur :checked
+  const locationChecked = document.querySelector("input[name='location']:checked");
+  if (!locationChecked) {
+    displayErrorMessages(locations[0], "Veuillez choisir une localisation.");
+    return false;
+  }
+  removeErrorMessages(locations[0]);
+  return true;
 }
 
 function validateCheckbox() {
