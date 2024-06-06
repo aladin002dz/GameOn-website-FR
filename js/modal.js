@@ -1,3 +1,4 @@
+/*
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -6,6 +7,13 @@ function editNav() {
     x.className = "topnav";
   }
 }
+*/
+// remplacer le 'onclick="editNav()"' en html par un addEventListener
+const menuIcon = document.querySelector("#menuIcon");
+menuIcon.addEventListener("click", () => {
+  const nav = document.querySelector("#myTopnav");
+  nav.classList.toggle("responsive");
+});
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
@@ -157,5 +165,19 @@ function removeErrorMessages(input) {
   const parentElement = input.parentElement;
   parentElement.setAttribute("data-error-visible", false);
 }
+
+//feedback immediat pour l'utilisateur
+firstNameInput.addEventListener("blur", (e) => validateNames(e.target));
+/* ou plus simplement
+firstNameInput.addEventListener("blur", () => validateNames(firstNameInput)); */
+
+lastNameInput.addEventListener("blur", (e) => validateNames(e.target));
+emailInput.addEventListener("blur", validateEmail);
+birthdateInput.addEventListener("blur", validateBirthdate);
+quantityInput.addEventListener("blur", validateQuantity);
+const locations = document.querySelectorAll("input[name='location']");
+locations.forEach(location => location.addEventListener("change", validateLocation));
+document.getElementById("checkbox1").addEventListener("change", validateCheckbox);
+
 
 
