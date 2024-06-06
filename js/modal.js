@@ -90,13 +90,6 @@ function validateQuantity() {
   return true;
 }
 const locations = document.querySelectorAll("input[name='location']");
-locations.forEach((location) => location.addEventListener("change",
-  (e) => {
-    if (e.target.checked) {
-      removeErrorMessages(locations[0])
-    }
-  }
-));
 function validateLocation() {
   /*
   const locations = document.querySelectorAll("input[name='location']");
@@ -175,8 +168,16 @@ lastNameInput.addEventListener("blur", (e) => validateNames(e.target));
 emailInput.addEventListener("blur", validateEmail);
 birthdateInput.addEventListener("blur", validateBirthdate);
 quantityInput.addEventListener("blur", validateQuantity);
-const locations = document.querySelectorAll("input[name='location']");
-locations.forEach(location => location.addEventListener("change", validateLocation));
+//locations.forEach(location => location.addEventListener("change", validateLocation));
+locations.forEach((location) => location.addEventListener("change",
+  /*(e) => {
+    if (e.target.checked) {
+      removeErrorMessages(locations[0])
+    }
+  }*/
+  //or simply, because any change means that a location is checked
+  () => removeErrorMessages(locations[0])
+));
 document.getElementById("checkbox1").addEventListener("change", validateCheckbox);
 
 
